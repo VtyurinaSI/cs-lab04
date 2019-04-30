@@ -113,10 +113,28 @@ void calc  (uint16_t op1, char operat, uint16_t op2)
 
     print_in_binary(&res, sizeof(res));
 }
+struct Student
+{
+    char name[17];
+    uint16_t year;
+    float average;
+    uint8_t gender : 1;
+    uint8_t courses;
+    Student* starosta;
+};
 
 int main()
 {
+    Student students[3] =
+    {
+        {"FeoktistovaAR", 1999, 5.0, 0, 1, nullptr},
+        {"StryukovaTA", 2000, 4.5, 0, 1, &students[0]},
+        {"ZabarinID", 2000, 4.0, 1, 1, &students[0]}
+    };
 
+    cout<<"adress of student: "<<&students<<endl;
+    cout<<"Size of students: "<<sizeof(students);
+    /*
     assert(nibble_to_hex(0x0) == '0');
     assert(nibble_to_hex(0x1) == '1');
     assert(nibble_to_hex(0x2) == '2');
@@ -154,5 +172,6 @@ int main()
 
     calc(1025,'&',127);
 
+    */
     return 0;
 }
