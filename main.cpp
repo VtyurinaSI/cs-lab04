@@ -2,24 +2,27 @@
 #include <cassert>
 using namespace std;
 
+char nibble_to_hex (uint8_t i)
+{
+    assert((0x0 <= i) && (i <= 0xf));
+    char symbols[] = "0123456789abcdef";
+    return symbols[i];
+}
+
 void print_in_hex(uint8_t byte)
 {
     cout << nibble_to_hex(byte >> 4)
-         << nibble_to_hex(byte & 0x0f);
+         << nibble_to_hex(byte & 0xf);
 }
 //маленькая
+
 void print_in_hex(const void* data, size_t size);//большая
 /*
 void print_in_binary(uint8_t byte);
 void print_in_binary(const void* data, size_t size);
 */
 
-char nibble_to_hex (uint8_t i)
-{
-    assert(0x0 <= i && i <= 0xf);
-    char symbols[] = "0123456789abcdef";
-    return symbols[i];
-}
+
 
 int main()
 {
@@ -33,7 +36,7 @@ int main()
     assert(nibble_to_hex(0x6) == '6');
     assert(nibble_to_hex(0x7) == '7');
     assert(nibble_to_hex(0x8) == '8');
-    assert(nibble_to_hex(0x9) == '8');
+    assert(nibble_to_hex(0x9) == '9');
     assert(nibble_to_hex(0xa) == 'a');
     assert(nibble_to_hex(0xb) == 'b');
     assert(nibble_to_hex(0xc) == 'c');
