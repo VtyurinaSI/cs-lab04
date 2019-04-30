@@ -65,8 +65,54 @@ print_in_hex(const void* data, size_t size)
     }
 }
 
+void
+print_in_binary(const void* data, size_t size)
+{
+    const uint8_t* bytes = as_bytes(data);
+    for (size_t i = 0; i < size; i++)
+    {
+        print_in_binary(bytes[i]);
+        if ((i + 1) % 4 == 0)
+        {
+            cout << '\n';
+        }
+        else
+        {
+            cout << ' ';
+        }
+    }
+}
 
+void calc  (uint16_t op1, char operat, uint16_t op2)
+{
+    print_in_hex(&op1, sizeof(op1));
+    cout <<' '<< operat<<' ';
+    print_in_hex(&op2, sizeof(op2));
+    cout << " = ";
+    uint16_t res;
+    if (operat == '&')
+    {
+        res = op1 & op2;
+    }
+    if (operat == '|')
+    {
+        res = op1 | op2;
+    }
+    if (operat == '^')
+    {
+        res = op1 ^ op2;
+    }
+    print_in_hex(&res, sizeof(res));
 
+    cout<<endl<<endl;
+
+    print_in_binary(&op1, sizeof(op1));
+    cout <<' '<< operat<<' ';
+    print_in_binary(&op2, sizeof(op2));
+    cout << " = ";
+
+    print_in_binary(&res, sizeof(res));
+}
 
 int main()
 {
@@ -102,6 +148,11 @@ int main()
     cout << "u8 bytes: ";
     print_in_hex(&u8, sizeof(u8));
     cout << '\n';
+
+    print_in_binary(15);
+    cout << endl << endl;
+
+    calc(1025,'&',127);
 
     return 0;
 }
